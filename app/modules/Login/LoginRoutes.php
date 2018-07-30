@@ -14,7 +14,7 @@ $app->post('/login', function ($request, $response, $args) {
 /* Ruta que devuelve un login según su id */
 $app->get('/logout', function ($request, $response, $args) {
 	$headers = $request->getHeaders();
-	//$json = $this->login->doLogout($headers);
+	$json = $this->login->doLogout($headers);
 	$response->write(json_encode($json));	
 	return $request;
 });

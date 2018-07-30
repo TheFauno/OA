@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OIRS - Ingeniería Civil Ambiental</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link href="css/main.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+
+<body>
+
+    <div id="index-banner" class="parallax-container">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <h1 class="header center purple-text text-darken-3">Reclamos y Sugerencias</h1>
+                <div class="row center">
+                    <h5 class="header col s12 purple-text text-darken-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis, maiores?</h5>
+                </div>
+                <div class="row center">
+                    <a href="#seccion-form" id="download-button" class="btn-large waves-effect waves-light purple darken-3">Comenzar</a>
+                </div>
+            </div>
+        </div>
+        <div class="parallax">
+            <img src="img/mountain.png" alt="Unsplashed background img 1">
+        </div>
+    </div>
+
+
+    <div id="seccion-form" class="container">
+        <div id="app" class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title purple-text darken-3">Instrucciones de uso</span>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div v-if="isDone" class="card">
+                        <div class="card-content">
+                            <span class="card-title purple-text darken-3">Formulario</span>
+                            <hr>
+                            <!-- Formulario -->
+                            <form @submit.prevent="verificarDatos" id="form-container">
+                                <div class="row">
+                                    <!-- Rut -->
+                                    <div class="col s12">
+                                        <div class="input-field">
+                                            <input v-model="rut" id="rut" type="text">
+                                            <label for="rut">Rut</label>
+                                        </div>
+                                    </div>
+                                    <!-- Tipo de comentario -->
+                                    <div class="col s12">
+                                        <div class="input-field">
+                                            <select v-model="tipo_comentario">
+                                                <option value="" disabled selected>Selecciona una opción</option>
+                                                <option v-for="tipo in tipos_comentario" :key="'t'+tipo.idtipo_comentario" :value="tipo.idtipo_comentario">{{ tipo.nombre }}</option>
+                                            </select>
+                                            <label>Tipo de comentario</label>
+                                        </div>
+                                    </div>
+                                    <!-- Área -->
+                                    <div class="col s12">
+                                        <div class="input-field">
+                                            <select v-model="area">
+                                                <option value="" disabled selected>Selecciona una opción</option>
+                                                <option v-for="area in areas" :key="'a'+area.idarea" :value="area.idarea">{{ area.nombre }}</option>
+                                            </select>
+                                            <label>Área</label>
+                                        </div>
+                                    </div>
+                                    <!-- Comentario -->
+                                    <div class="col s12">
+                                        <div class="input-field">
+                                            <textarea v-model="comentario" id="comentario" class="materialize-textarea"></textarea>
+                                            <label for="comentario">Comentario</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col s12 right-align">
+                                        <button class="btn waves-effect waves-light purple darken-3" :disabled="isLoading" type="submit" name="action">Enviar
+                                            <i class="material-icons right">send</i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                    <div v-else class="card">
+                        <div class="card-content center-align">
+                            <span class="card-title purple-text darken-3">¡Su comentario ha sido registrado!</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer black">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">OIRS- Ingeniería Civil Ambiental</h5>
+                    <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est, vitae reiciendis ad debitis deleniti nemo
+                        rem inventore dolorem odit ipsum.</p>
+
+
+                </div>
+                <div class="col l3 s12 offset-l3">
+                    <h5 class="white-text">Contacto</h5>
+                    <ul>
+                        <li>
+                            <a class="white-text" href="#!">Email: contacto@oirs.cl</a>
+                        </li>
+                        <li>
+                            <a class="white-text" href="#!">Teléfono: +56 9 12345678</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Universidad Arturo Prat Iquique
+            </div>
+        </div>
+    </footer>
+
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

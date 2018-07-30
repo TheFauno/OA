@@ -14,11 +14,9 @@ class Login{
 		$this->secret = 'asudj9a8d89a7hs89dja9s';
 	}
 
-	public function doLogin($username, $password){
-		$username = strtoupper($username);
-		$query = $this->db->prepare('	SELECT id, username, password, user_profile
-    									FROM user WHERE USERNAME = :username');
-		$query -> bindParam(':username', $username);
+	public function doLogin($rut, $password){
+		$query = $this->db->prepare('SELECT rut, CONCAT(nombre, \' \', apaterno, \' \', amaterno) AS nombre, password FROM jefe_carrera WHERE rut = :rut');
+		$query -> bindParam(':rut', $rut);
 
 		if( $query -> execute() ){
 			$user = $query->fetch();
@@ -42,7 +40,8 @@ class Login{
 		$token = explode(" ", $headers['HTTP_AUTHORIZATION'][0]);
         $decoded = JWT::decode($token[1], $this->secret, array('HS256'));
 
-        //Update token
+		//Update token
+		/*
         $query = $this->db->prepare('	UPDATE usuario SET TOKEN = null
 										WHERE UID = :uid');
 		$query->bindParam(':uid', $decoded->uid);
@@ -56,20 +55,28 @@ class Login{
 				'status' => 'error',
 				'message' => 'Ocurrió un error al cerrar sesión'
 			);
-		}
+		}*/
+		return array(
+			"status" => "success"
+		);
 	}
 
 	private function verificarPassword($password, $user){
 		if(password_verify($password, $user['password'])){
 	        $usuario['iat'] = time();
             $usuario['exp'] = time() + (12 * 60 * 60);
-            $usuario['type'] = intval($user['user_profile']);
-	        $usuario['username'] = $user['username'];
-	        $usuario['id'] = $user['id'];
+            //$usuario['type'] = intval($user['user_profile']);
+	        //$usuario['username'] = $user['username'];
+	        $usuario['rut'] = $user['rut'];
 
 			$jwt = JWT::encode($usuario, $this->secret);
-
+			return array(
+				"status" => "success",
+				"message" => "bienvenido",
+				"token" => $jwt
+			);
 			// guardar token en la bd
+			/*
 			$query = $this->db->prepare('UPDATE user SET token = :token
 										 WHERE id = :id');
 			$query->bindParam(':token', $jwt);
@@ -87,6 +94,7 @@ class Login{
 					'message' => 'ocurrió un error al generar el token'
 				);
 			}
+			*/
 		}else
 			return array(
 				'status' => 'error',

@@ -13,17 +13,17 @@ class LoginController{
 	}
 
 	public function doLogin($credenciales){		
-		if(!isset($credenciales['username']) || !isset($credenciales['password'])){
+		if(!isset($credenciales['rut']) || !isset($credenciales['password'])){
 			return array(
 				'status' 	=> 'error', 
 				'message' 	=> 'usuario o contraseña incorrectos'
 			);
 		}
 
-		$username = filter_var($credenciales['username'], FILTER_SANITIZE_STRING);
+		$rut = filter_var($credenciales['rut'], FILTER_SANITIZE_STRING);
     	$password = filter_var($credenciales['password'], FILTER_SANITIZE_STRING);
 
-		return $this->login->doLogin($username, $password);
+		return $this->login->doLogin($rut, $password);
 	}
 
 	public function doLogout($headers){		

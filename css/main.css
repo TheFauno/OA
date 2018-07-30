@@ -1,0 +1,29 @@
+#index-banner {
+    min-height: 500px;
+    background: rgb(106, 27, 154);
+    /* Old browsers */
+    background: -moz-linear-gradient(left, rgba(106, 27, 154, 0.1) 0%, rgba(136, 110, 153, 0.1) 100%, rgba(41, 137, 216, 0.1) 100%, rgba(125, 185, 232, 1) 100%, rgba(41, 137, 216, 1) 100%, rgba(125, 185, 232, 1) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(106, 27, 154, 0.1) 0%, rgba(136, 110, 153, 0.1) 100%, rgba(41, 137, 216, 0.1) 100%, rgba(125, 185, 232, 1) 100%, rgba(41, 137, 216, 1) 100%, rgba(125, 185, 232, 1) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(106, 27, 154, 0.1) 0%, rgba(136, 110, 153, 0.1) 100%, rgba(41, 137, 216, 0.1) 100%, rgba(125, 185, 232, 1) 100%, rgba(41, 137, 216, 1) 100%, rgba(125, 185, 232, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6a1b9a', endColorstr='#7db9e8', GradientType=1);
+}
+
+#index-banner .section {
+    padding-top: 3rem;
+}
+
+hr {
+    margin: 0;
+    width: 14%;
+    height: 2px;
+    border: none;
+    background-color: #9C27B0;
+}
+
+.footer-copyright {
+    font-size: 12px;
+    text-align: center;
+}
